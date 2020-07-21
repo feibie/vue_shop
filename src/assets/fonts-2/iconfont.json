@@ -1,0 +1,44 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "94614",
+      "name": "users",
+      "font_class": "users",
+      "unicode": "e691",
+      "unicode_decimal": 59025
+    },
+    {
+      "icon_id": "2570077",
+      "name": "单据",
+      "font_class": "danju-tianchong",
+      "unicode": "e62a",
+      "unicode_decimal": 58922
+    },
+    {
+      "icon_id": "3827284",
+      "name": "报表",
+      "font_class": "weibiaoti-icon-",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "9268758",
+      "name": "立方体 立体 多面体 方块2 (1)",
+      "font_class": "lifangtilitiduomiantifangkuai",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "13414334",
+      "name": "商品",
+      "font_class": "shangpin",
+      "unicode": "e7a4",
+      "unicode_decimal": 59300
+    }
+  ]
+}
