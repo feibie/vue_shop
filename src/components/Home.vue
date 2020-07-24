@@ -76,7 +76,7 @@ export default {
     }
   },
   created() {
-    this.getMenuList(),
+    this.getMenuList()
     this.activePath = window.sessionStorage.getItem('activePath')
   },
   methods: {
