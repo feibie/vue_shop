@@ -127,7 +127,7 @@ export default {
       queryInfo: {
         type: 3,
         pagenum: 1,
-        pagesize: 5,
+        pagesize: 5
       },
       // 商品获取的数据列表，默认为空
       catelist: [],
@@ -137,29 +137,29 @@ export default {
       columns: [
         {
           label: '分类名称',
-          prop: 'cat_name',
+          prop: 'cat_name'
         },
         {
           label: '是否有效',
           // 表示，将当前列定义为模板列
           type: 'template',
           // 表示当前这一列使用的模板名称
-          template: 'isok',
+          template: 'isok'
         },
         {
           label: '排序',
           // 表示，将当前列定义为模板列
           type: 'template',
           // 表示当前这一列使用的模板名称
-          template: 'order',
+          template: 'order'
         },
         {
           label: '操作',
           // 表示，将当前列定义为模板列
           type: 'template',
           // 表示当前这一列使用的模板名称
-          template: 'opt',
-        },
+          template: 'opt'
+        }
       ],
       // 控制添加分类对话框的显示与隐藏
       addCateDialogVisible: false,
@@ -170,13 +170,13 @@ export default {
         // 分类父 ID，如果要添加1级分类，则父分类Id应该设置为  `0`
         cat_pid: 0,
         // 分类层级:默认`0`表示一级分类；`1`表示二级分类；`2`表示三级分类
-        cat_level: 0,
+        cat_level: 0
       },
       // 添加分类表单的规则对象
       addCateFormRules: {
         cat_name: [
-          { required: true, message: '请输入分类名称', trigger: 'blur' },
-        ],
+          { required: true, message: '请输入分类名称', trigger: 'blur' }
+        ]
       },
       // 父级分类的列表
       parentCateList: [],
@@ -186,7 +186,7 @@ export default {
         value: 'cat_id',
         label: 'cat_name',
         children: 'children',
-        checkStrictly: true,
+        checkStrictly: true
       },
       // 选中的父级分类的Id数据
       selectedKeys: [],
@@ -197,9 +197,9 @@ export default {
       // 编辑分类表单的规则对象
       editCateFormRules: {
         cat_name: [
-          { required: true, message: '请输入活动名称', trigger: 'blur' },
-        ],
-      },
+          { required: true, message: '请输入活动名称', trigger: 'blur' }
+        ]
+      }
     }
   },
   created() {
@@ -209,7 +209,7 @@ export default {
     // 获取商品分类数据
     async getCateList() {
       const { data: res } = await this.$http.get('categories', {
-        params: this.queryInfo,
+        params: this.queryInfo
       })
       if (res.meta.status !== 200) {
         return this.$message.error('获取商品分类失败！')
@@ -241,8 +241,8 @@ export default {
     async getParentCateList() {
       const { data: res } = await this.$http.get('categories', {
         params: {
-          type: 2,
-        },
+          type: 2
+        }
       })
       if (res.meta.status !== 200) {
         return this.$message.error('获取父级分类数据失败！')
@@ -255,13 +255,13 @@ export default {
       console.log(this.selectedKeys)
       // 如果 selectedKeys 数组中的 length 大于 0 ，证明选中的父级分类
       // 反正，就说明没有选择任何父级分类
-      let length = this.selectedKeys.length
+      const length = this.selectedKeys.length
       if (length > 0) {
         // 父级分类的id
         this.addCateForm.cat_pid = this.selectedKeys[length - 1]
         // 为当前分类的等级赋值
         this.addCateForm.cat_level = length
-        return
+        return false
       } else {
         this.addCateForm.cat_pid = 0
         this.addCateForm.cat_level = 0
@@ -289,7 +289,7 @@ export default {
       this.selectedKeys = []
       this.addCateForm = {
         cat_level: 0,
-        cat_pid: 0,
+        cat_pid: 0
       }
     },
     // 点击编辑按钮，显示编辑对话框
@@ -309,7 +309,7 @@ export default {
         const { data: res } = await this.$http.put(
           'categories/' + this.editCateForm.cat_id,
           {
-            cat_name: this.editCateForm.cat_name,
+            cat_name: this.editCateForm.cat_name
           }
         )
         if (res.meta.status !== 200) {
@@ -322,22 +322,26 @@ export default {
     },
     // 删除分类
     async deleteCateById(id) {
-      const confirmResult = await this.$confirm('此操作将永久删除该分类, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning',
-      }).catch(err => err)
-      if(confirmResult !== 'confirm') {
+      const confirmResult = await this.$confirm(
+        '此操作将永久删除该分类, 是否继续?',
+        '提示',
+        {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }
+      ).catch((err) => err)
+      if (confirmResult !== 'confirm') {
         return this.$message.info('已取消删除该分类')
       }
-      const {data:res} = await this.$http.delete('categories/' + id)
-      if(res.meta.status !== 200) {
+      const { data: res } = await this.$http.delete('categories/' + id)
+      if (res.meta.status !== 200) {
         this.$message.error('删除分类失败！')
       }
       this.$message.success('删除分类成功！')
       this.getCateList()
-    },
-  },
+    }
+  }
 }
 </script>
 

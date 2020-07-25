@@ -61,24 +61,22 @@ export default {
     }
   },
   methods: {
-    //点击重置按钮，重置登录表单
+    // 点击重置按钮，重置登录表单
     resetLoginForm() {
       this.$refs.loginFormRef.resetFields()
     },
     login() {
-      this.$refs.loginFormRef.validate(async valid => {
+      this.$refs.loginFormRef.validate(async (valid) => {
         if (!valid) return
         const { data: res } = await this.$http.post('login', this.LoginForm)
         if (res.meta.status !== 200) {
           return this.$message.error('登录失败')
         }
         this.$message.success('登录成功')
-        /**1.将登录成功后的token，保存到客户端的 sessionStorage 中
-          1.1 项目中除了登录之外的其他API接口，必须在登录之后才能访问
-          1.2 token 只应在当前网站到款期间生效，所以讲token 保存到sessionStorage中
-          2.通过编程式导航跳转到后台主页，路由地址是/home 
-          */
-
+        // 1. 将登录成功后的token，保存到客户端的 sessionStorage 中
+        // 1.1 项目中除了登录之外的其他API接口，必须在登录之后才能访问
+        // 1.2 token 只应在当前网站到款期间生效，所以讲token 保存到sessionStorage中
+        // 2. 通过编程式导航跳转到后台主页，路由地址是/home
         window.sessionStorage.setItem('token', res.data.token)
         this.$router.push('/home')
       })
@@ -135,4 +133,4 @@ export default {
   display: flex;
   justify-content: flex-end;
 }
-</style> 
+</style>

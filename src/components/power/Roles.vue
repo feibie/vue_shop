@@ -49,7 +49,7 @@
                   <el-col :span="18">
                     <el-tag
                       type="warning"
-                      v-for="(item3, index3) in item2.children"
+                      v-for="(item3) in item2.children"
                       :key="item3.id"
                       closable
                       @close="removeRightById(scope.row, item3.id)"
@@ -166,9 +166,9 @@ export default {
       // 添加角色的验证规则对象
       addRoleListRules: {
         roleName: [
-          { required: true, message: '请输入角色名称', trigger: 'blur' },
+          { required: true, message: '请输入角色名称', trigger: 'blur' }
         ],
-        roleDesc: [{ message: '请输入角色描述', trigger: 'blur' }],
+        roleDesc: [{ message: '请输入角色描述', trigger: 'blur' }]
       },
       // 控制编辑角色对话框的显示和隐藏
       editDialogVisible: false,
@@ -181,7 +181,7 @@ export default {
       // 编辑角色的验证规则对象
       editRoleListRules: {
         roleName: [
-          { required: true, message: '请输入角色名称', trigger: 'blur' },
+          { required: true, message: '请输入角色名称', trigger: 'blur' }
         ],
         roleDesc: [{ message: '请输入角色描述', trigger: 'blur' }]
       },
@@ -197,7 +197,7 @@ export default {
       // 默认选中的节点Id值数组
       defKeys: [],
       // 当前即将分配权限的角色id
-      roleId: '',
+      roleId: ''
     }
   },
   created() {
@@ -266,7 +266,7 @@ export default {
         {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
-          type: 'warning',
+          type: 'warning'
         }
       ).catch((err) => err)
       if (confirmResult !== 'confirm') {
@@ -289,7 +289,7 @@ export default {
         {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
-          type: 'warning',
+          type: 'warning'
         }
       ).catch((err) => err)
       if (confirmResult !== 'confirm') {
@@ -306,7 +306,7 @@ export default {
     // 展开分配权限的对话框
     async showSetRightsDialog(role) {
       this.roleId = role.id
-      //获取所以权限的数据
+      // 获取所以权限的数据
       const { data: res } = await this.$http.get('rights/tree')
       if (res.meta.status !== 200) {
         return this.$message.error('获取权限数据失败')
@@ -337,13 +337,13 @@ export default {
       console.log(this.roleId)
       const keys = [
         ...this.$refs.treeRef.getCheckedKeys(),
-        ...this.$refs.treeRef.getHalfCheckedKeys(),
+        ...this.$refs.treeRef.getHalfCheckedKeys()
       ]
       const idStr = keys.join(',')
       const { data: res } = await this.$http.post(
         `roles/${this.roleId}/rights`,
         {
-          rids: idStr,
+          rids: idStr
         }
       )
       console.log(res)
@@ -353,8 +353,8 @@ export default {
       this.$message.success('分配权限成功！')
       this.getRolesList()
       this.setRightsDialogVisible = false
-    },
-  },
+    }
+  }
 }
 </script>
 
